@@ -1,4 +1,4 @@
-<?php include("../../../include/_header.php") ?>
+
 <?php
 
 require './read.php'; // Assuming this path is correct and `read.php` is in the same directory

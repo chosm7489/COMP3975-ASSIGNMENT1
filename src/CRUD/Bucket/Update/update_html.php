@@ -1,4 +1,4 @@
-<?php include("../../../include/_header.php") ?>
+
 <?php
 require_once './update.php';
 
