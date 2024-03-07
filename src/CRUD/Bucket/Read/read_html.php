@@ -1,4 +1,4 @@
-<?php include("../../../include/_header.php") ?>
+
 <?php require './read.php'; // Make sure this path is correct for your project structure
 
 session_start();
