@@ -1,8 +1,6 @@
 <?php include("./include/_header.php") ?>
 <?php include("./include/_navbar.php") ?>
 
-
-
 <?php
 
 // Check if the user is not logged in, redirect to login page
