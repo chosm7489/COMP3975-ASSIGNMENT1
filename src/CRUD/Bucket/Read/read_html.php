@@ -1,7 +1,8 @@
 
-<?php require './read.php'; // Make sure this path is correct for your project structure
+<?php session_start();
+require './read.php'; // Make sure this path is correct for your project structure
 
-session_start();
+
 $db = connect_database(); // Initialize your database connection
 $buckets = get_buckets($db); // Fetch all buckets
 ?>

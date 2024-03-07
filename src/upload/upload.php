@@ -2,6 +2,13 @@
 session_start(); // Start the session at the beginning of the file
 require '../database_setup.php';
 
+$uploadDir = '../imported/';
+
+// Check if the directory exists, if not, create it
+if (!is_dir($uploadDir)) {
+    mkdir($uploadDir, 0777, true);
+}
+
 // Initialize an array to hold messages and a flag for overall success
 $_SESSION['messages'] = [];
 $allFilesSuccess = true; // Assume success until proven otherwise
