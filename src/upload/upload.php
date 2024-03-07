@@ -44,11 +44,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['transactionFiles']))
         }
     }
 
-    // If all files were successfully processed, set a general success message
-    if ($allFilesSuccess) {
-        $_SESSION['messages'] = ["All data has been successfully uploaded and imported."];
-    }
-    
 } else {
     $_SESSION['messages'][] = "No file uploaded or wrong method used.";
 }

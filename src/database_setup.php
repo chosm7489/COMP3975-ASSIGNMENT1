@@ -86,51 +86,45 @@ function connect_database()
 
 function importCSVToSQLite($filePath, $db)
 {
-    $success = true; // Assume success initially
+
+       $success = true;
 
     if (($handle = fopen($filePath, "r")) !== FALSE) {
-        try {
-            $db->exec('BEGIN;');
-            $stmt = $db->prepare("INSERT INTO transactions (transaction_date, name, expense, income, overall_balance) VALUES (?, ?, ?, ?, ?)");
+        $db->exec('BEGIN;');
+        $stmt = $db->prepare("INSERT INTO transactions (transaction_date, name, expense, income, overall_balance) VALUES (?, ?, ?, ?, ?)");
 
-            // Skip the header line
-            fgetcsv($handle);
+        // Skip the header line
+        fgetcsv($handle);
 
-            while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-                $date = DateTime::createFromFormat('m/d/Y', $data[0]);
-                if ($date) {
-                    $formattedDate = $date->format('Y-m-d');
-                } else {
-                    // Handle the error appropriately if the date conversion fails
-                    $success = false; // Set success to false if there's an error
-                    continue; // Skip this row or use a default date
-                }
-
-                $stmt->bindValue(1, $formattedDate, SQLITE3_TEXT);
-                $cleanName = trim(preg_replace('/\s+/', ' ', $data[1]));
-                $stmt->bindValue(2, $cleanName, SQLITE3_TEXT);
-                $stmt->bindValue(3, $data[2], SQLITE3_FLOAT);
-                $stmt->bindValue(4, $data[3], SQLITE3_FLOAT);
-                $stmt->bindValue(5, $data[4], SQLITE3_FLOAT);
-                $stmt->execute();
+        while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            $date = DateTime::createFromFormat('m/d/Y', $data[0]);
+            if ($date) {
+                $formattedDate = $date->format('Y-m-d');
+            } else {
+                // Handle the error appropriately if the date conversion fails
+                echo "Error parsing date: {$data[0]}";
+                continue; // Skip this row or use a default date
             }
 
-            $db->exec('COMMIT;');
-        } catch (Exception $e) {
-            $db->exec('ROLLBACK;');
-            $success = false; // Set success to false in case of exception
+            $stmt->bindValue(1, $formattedDate, SQLITE3_TEXT); // Transaction date in YYYY-MM-DD format
+            // $stmt->bindValue(1, $data[0], SQLITE3_TEXT); // Transaction date
+            $cleanName = trim(preg_replace('/\s+/', ' ', $data[1]));
+            $stmt->bindValue(2, $cleanName, SQLITE3_TEXT); // Name
+            $stmt->bindValue(3, $data[2], SQLITE3_FLOAT); // Expense
+            $stmt->bindValue(4, $data[3], SQLITE3_FLOAT); // Income
+            $stmt->bindValue(5, $data[4], SQLITE3_FLOAT); // Overall balance
+            $stmt->execute();
         }
 
+        $db->exec('COMMIT;');
         fclose($handle);
 
-        // Rename the file after importing, only if there were no errors
-        if ($success) {
-            rename($filePath, $filePath . '.imported');
-        }
+        // Rename the file after importing
+        rename($filePath, $filePath . '.imported');
     } else {
         $success = false; // Could not open file
     }
 
-    return $success; // Return the success flag
+    return $success; 
 }
 
