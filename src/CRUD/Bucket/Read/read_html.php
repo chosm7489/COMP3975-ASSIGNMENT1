@@ -1,6 +1,7 @@
 
 <?php session_start();
-require './read.php'; // Make sure this path is correct for your project structure
+
+require './Read.php'; // Make sure this path is correct for your project structure
 
 
 $db = connect_database(); // Initialize your database connection
