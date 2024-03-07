@@ -4,17 +4,6 @@
 // Start PHP session
 session_start();
 
-function getBaseUrl() {
-    // Check if HTTPS is used
-    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https://" : "http://";
-    // Get the server name
-    $domainName = $_SERVER['HTTP_HOST'];
-    // Construct the base URL
-    return $protocol . $domainName;
-}
-
-$baseURL = getBaseUrl();
-
 require_once '../src/database_setup.php'; // Include your database setup file
 $db = connect_database(); // Make sure you adjust this line according to how you set up and access your database connection
 
@@ -38,8 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['is_admin'] = $user['is_admin'];
 
             // Redirect to a protected page
-            // header("Location: ../src/index.php");
-            header("Location: " . $baseURL . "/src/index.php");
+            header("Location: src/index.php");
             exit();
         } else {
             $error = "Your account is pending approval.";
@@ -50,10 +38,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Include this check in all your files to ensure only logged-in users can access them
-// if (isset($_SESSION['user_id'])) {
-//     header("Location: ../src/index.php");
-//     exit();
-// }
+if (isset($_SESSION['user_id'])) {
+    header("Location: src/index.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
