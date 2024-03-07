@@ -1,3 +1,4 @@
+<?php session_start();?>
 <?php include("./include/_header.php") ?>
 <?php include("./include/_navbar.php") ?>
 
@@ -59,6 +60,12 @@ $db = connect_database();
         ?>
         
     </div>
+        <?php
+        if (isset($_SESSION['user_id']) && isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1) {
+            // Display the admin buttons
+            echo '<a class="nav-link" href="../User/admin.php">Admin Panel</a>';
+        }
+        ?>
 
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

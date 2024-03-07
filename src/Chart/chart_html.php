@@ -1,4 +1,4 @@
-<?php include("../include/_header.php") ?>
+
 
 <?php
 // Assuming $db is your database connection

@@ -1,8 +1,8 @@
 <?php
 // Start the session
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
+// if (session_status() == PHP_SESSION_NONE) {
+//     session_start();
+// }
 ?>
 
 
@@ -25,15 +25,10 @@ if (session_status() == PHP_SESSION_NONE) {
                     <a class="nav-link" href="../src/CRUD/Bucket/Read/read_html.php">Bucket</a>
                 </li>
                 <?php
-                if (isset($_SESSION['user_id']) && isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1) {
-                    // Display the admin buttons
-                    echo '<li class="nav-item">';
-                    echo '<a class="nav-link" href="../User/admin.php">Admin Panel</a>';
-                    echo '</li>';
-                    // echo '<li class="nav-item">';
-                    // echo '<a class="nav-link" href="../src/CRUD/Bucket/Read/read_html.php">Bucket</a>';
-                    // echo '</li>';
-                }
+                // if (isset($_SESSION['user_id']) && isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1) {
+                //     // Display the admin buttons
+                //     echo '<a class="nav-link" href="../User/admin.php">Admin Panel</a>';
+                // }
                 ?>
                 <li class="nav-item">
                     <a class="nav-link" href="../User/logout.php">Logout</a>
