@@ -1,7 +1,7 @@
 <?php
 
 // Start PHP session
-// session_start();
+session_start();
 
 // include("../src/include/_header.php");
 
@@ -39,10 +39,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Include this check in all your files to ensure only logged-in users can access them
-// if (isset($_SESSION['user_id'])) {
-//     header("Location: ../src/index.php");
-//     exit();
-// }
+if (isset($_SESSION['user_id'])) {
+    header("Location: ../src/index.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
