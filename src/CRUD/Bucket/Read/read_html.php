@@ -1,6 +1,5 @@
-
-<?php session_start();
-
+<?php session_start() ?>
+<?php 
 require './Read.php'; // Make sure this path is correct for your project structure
 
 
