@@ -1,3 +1,10 @@
+<?php
+// Start the session
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+?>
+
 
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">

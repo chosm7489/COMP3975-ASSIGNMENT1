@@ -4,11 +4,11 @@
 <?php
 
 // Check if the user is not logged in, redirect to login page
-if (!isset($_SESSION['user_id'])) {
-    // Use an absolute URL to avoid header injection risks
-    header('Location: http://localhost:8888');
-    exit; // Prevent further execution of the script
-}
+// if (!isset($_SESSION['user_id'])) {
+//     // Use an absolute URL to avoid header injection risks
+//     header('Location: http://localhost:8888');
+//     exit; // Prevent further execution of the script
+// }
 // Check if a CSV file is uploaded
 if (isset($_FILES['transactionFile']) && $_FILES['transactionFile']['error'] === UPLOAD_ERR_OK) {
     // Process the uploaded file here
