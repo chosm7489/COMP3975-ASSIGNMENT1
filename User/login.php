@@ -3,7 +3,7 @@
 // Start PHP session
 // session_start();
 
-include("../src/include/_header.php");
+// include("../src/include/_header.php");
 
 require_once '../src/database_setup.php'; // Include your database setup file
 $db = connect_database(); // Make sure you adjust this line according to how you set up and access your database connection
